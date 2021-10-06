@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WhatToWear.Database\WhatToWear.Database.csproj" />
+    <ProjectReference Include="..\WhatToWear.Models\WhatToWear.Models.csproj" />
+  </ItemGroup>
+
 </Project>
