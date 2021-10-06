@@ -5,15 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\city-list.json" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Data\city-list.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
+    <ProjectReference Include="..\WhatToWear.Models\WhatToWear.Models.csproj" />
   </ItemGroup>
 
 </Project>

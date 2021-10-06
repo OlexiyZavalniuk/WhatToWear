@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatToWear.API", "WhatToWear\WhatToWear.API.csproj", "{3A9F6E65-5A45-4B0B-878F-D1FC985C9FA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatToWear.Core", "WhatToWear.Core\WhatToWear.Core.csproj", "{4CDE25FB-EB39-4203-A118-9DA295DB7837}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatToWear.Core", "WhatToWear.Core\WhatToWear.Core.csproj", "{4CDE25FB-EB39-4203-A118-9DA295DB7837}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatToWear.Database", "WhatToWear.Database\WhatToWear.Database.csproj", "{EC3B06C8-6B0B-4D05-BAAD-093905820238}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatToWear.Database", "WhatToWear.Database\WhatToWear.Database.csproj", "{EC3B06C8-6B0B-4D05-BAAD-093905820238}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatToWear.Models", "WhatToWear.Models\WhatToWear.Models.csproj", "{EE022E82-710C-4094-8B25-A670E6292D85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatToWear.Models", "WhatToWear.Models\WhatToWear.Models.csproj", "{EE022E82-710C-4094-8B25-A670E6292D85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatToWear.Tests", "WhatToWear.Tests\WhatToWear.Tests.csproj", "{832E1428-C910-432D-8356-2522DF5FC19C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatToWear.Tests", "WhatToWear.Tests\WhatToWear.Tests.csproj", "{832E1428-C910-432D-8356-2522DF5FC19C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriteCitiesToDB", "WriteCitiesToDB\WriteCitiesToDB.csproj", "{5FFE417B-B9E4-4F6F-B87B-A674C35E0A3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{832E1428-C910-432D-8356-2522DF5FC19C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{832E1428-C910-432D-8356-2522DF5FC19C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{832E1428-C910-432D-8356-2522DF5FC19C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FFE417B-B9E4-4F6F-B87B-A674C35E0A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FFE417B-B9E4-4F6F-B87B-A674C35E0A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FFE417B-B9E4-4F6F-B87B-A674C35E0A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FFE417B-B9E4-4F6F-B87B-A674C35E0A3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
