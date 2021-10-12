@@ -7,6 +7,8 @@ namespace WhatToWear.Database
     public class ApplicationContext : DbContext
     {
         public DbSet<City> Cities { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Clothes> Clothes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
