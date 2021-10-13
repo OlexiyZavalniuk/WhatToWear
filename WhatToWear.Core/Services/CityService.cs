@@ -8,12 +8,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WhatToWear.Core
 {
-    public static class CityService
+    public class CityService
     {
-        public static async Task<IEnumerable<City>> GetCitiesAsync(string toFind)
+        private ApplicationContext _db;
+
+        public CityService(ApplicationContext appContext)
         {
-            using ApplicationContext db = new();
-            return await db.Cities.Where(c => c.Name == toFind).ToListAsync();
+            _db = appContext;
+        }
+
+        public async Task<IEnumerable<City>> GetCitiesAsync(string toFind)
+        {
+            return await _db.Cities.Where(c => c.Name == toFind).ToListAsync();
         }
     }
 }

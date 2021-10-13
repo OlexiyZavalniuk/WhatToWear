@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WhatToWear.Core;
 using WhatToWear.Database;
 
 namespace WhatToWear
@@ -35,8 +36,11 @@ namespace WhatToWear
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WhatToWear", Version = "v1" });
             });
 
-            //services.AddDbContext<ApplicationContext>(opt =>
-            //    opt.UseSqlServer(Configuration.GetConnectionString("AppDbConnection")));
+            services.AddDbContext<ApplicationContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("AppDbConnection")));
+
+            services.AddTransient<CityService>();
+            services.AddTransient<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,33 +7,43 @@ using System.Threading.Tasks;
 using WhatToWear.Database;
 using WhatToWear.Models.Models;
 
-namespace WhatToWear.Core.Services
+namespace WhatToWear.Core
 {
-    public static class UserService
+    public class UserService
     {
-        public static async Task<int> CreateUser(string name)
+        private ApplicationContext _db;
+
+        public UserService(ApplicationContext appContext)
         {
-            using ApplicationContext db = new();
+            _db = appContext;
+        }
+        public async Task<int> CreateUserAsync(string name)
+        {
             
             User user = new();
-            int id = await db.Users.MaxAsync(u => u.Id);
-            user.Id = ++id;
             user.Name = name;
 
-            await db.Users.AddAsync(user);
-            await db.SaveChangesAsync();
+            _db.Users.Add(user);
+            await _db.SaveChangesAsync();
 
             return user.Id;
         }
 
-        public static async void SetLink(int id, string link)
+        public async Task DeleteUserAsync(int id)
         {
-            using ApplicationContext db = new();
+            User customer = new() { Id = id };
+            _db.Users.Attach(customer);
+            _db.Users.Remove(customer);
+            await _db.SaveChangesAsync();
+        }
 
-            User user = await db.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
+        public async void SetLinkAsync(int id, string link)
+        {
+            User user = await _db.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
 
             user.Link = link;
-            await db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
+
     }
 }

@@ -12,7 +12,7 @@ namespace WhatToWear.Models.Models
 
         public string Name { get; set; }
 
-        public string CityId { get; set; }
+        public string City { get; set; }
 
         public DateTime Time { get; set; }
 

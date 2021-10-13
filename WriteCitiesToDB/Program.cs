@@ -10,7 +10,7 @@ namespace WriteCitiesToDB
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             //Deserialize cities from file
             string json = File.ReadAllText("Data/cities.json");

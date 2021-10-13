@@ -8,6 +8,8 @@ namespace WhatToWear.Models.Models
 {
     public class Clothes
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public int Temperature { get; set; }

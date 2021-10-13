@@ -10,9 +10,14 @@ namespace WhatToWear.Database
         public DbSet<User> Users { get; set; }
         public DbSet<Clothes> Clothes { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=whattowear;Trusted_Connection=True;");
+            Database.EnsureCreated();
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WhatToWear;Trusted_Connection=True;");
+        //}
     }
 }
