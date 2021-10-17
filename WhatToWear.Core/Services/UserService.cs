@@ -29,6 +29,16 @@ namespace WhatToWear.Core
             return user.Id;
         }
 
+        public async Task<User> GetUserAsync(int id)
+        {
+            return await _db.Users.Where(u => u.Id == id).FirstOrDefaultAsync();           
+        }
+
+        public async Task<List<User>> GetUsersAsync()
+        {
+            return await _db.Users.ToListAsync();
+        }
+
         public async Task DeleteUserAsync(int id)
         {
             User customer = new() { Id = id };
@@ -37,11 +47,9 @@ namespace WhatToWear.Core
             await _db.SaveChangesAsync();
         }
 
-        public async void SetLinkAsync(int id, string link)
+        public async Task UpdateUserAsync(User user)
         {
-            User user = await _db.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
-
-            user.Link = link;
+            _db.Users.Update(user);
             await _db.SaveChangesAsync();
         }
 

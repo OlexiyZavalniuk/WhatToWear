@@ -8,10 +8,10 @@ namespace WhatToWear.Models.Models
 {
     public enum ClothesType
     {
-        headdress,
-        outerwear,
-        mediumwear,
-        handwear,
-        footwear
+        HeadDress,
+        OuterWear,
+        MediumWear,
+        HandWear,
+        FootWear
     }
 }

@@ -10,13 +10,13 @@ namespace WhatToWear.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class citiesController : ControllerBase
+    public class CitiesController : ControllerBase
     {
         private CityService _cityService;
 
-        private readonly ILogger<citiesController> _logger;
+        private readonly ILogger<CitiesController> _logger;
 
-        public citiesController(ILogger<citiesController> logger, CityService cityService)
+        public CitiesController(ILogger<CitiesController> logger, CityService cityService)
         {
             _logger = logger;
             _cityService = cityService;
