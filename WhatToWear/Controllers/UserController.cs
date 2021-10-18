@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WhatToWear.Core;
+using WhatToWear.Models.DTO;
 using WhatToWear.Models.Models;
 
 namespace WhatToWear.API.Controllers
@@ -46,7 +47,7 @@ namespace WhatToWear.API.Controllers
 
         [Route("")]
         [HttpPut]
-        public async Task<ActionResult<User>> Update([FromBody] User user)
+        public async Task<ActionResult<User>> Update([FromBody] UserDTO user)
         {
             await _userService.UpdateUserAsync(user);
             return Ok(await _userService.GetUserAsync(user.Id));
@@ -57,7 +58,7 @@ namespace WhatToWear.API.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _userService.DeleteUserAsync(id);
-            return NoContent();
+            return Ok();
         }
     }
 }

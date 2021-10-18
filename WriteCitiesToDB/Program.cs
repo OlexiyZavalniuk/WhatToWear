@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using WhatToWear.Database;
 using WhatToWear.Models.Models;
 
 namespace WriteCitiesToDB
@@ -17,9 +16,9 @@ namespace WriteCitiesToDB
             var citiesList = JsonConvert.DeserializeObject<List<City>>(json);
 
             //Write cities to db
-            using (ApplicationContext db = new ApplicationContext())
+            using (AppContext db = new())
             {
-                foreach(City city in citiesList)
+                foreach (City city in citiesList)
                 {
                     db.Cities.Add(city);
                 }

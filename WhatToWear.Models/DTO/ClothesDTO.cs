@@ -4,13 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WhatToWear.Models.Models;
 
-namespace WhatToWear.Models.Models
+namespace WhatToWear.Models.DTO
 {
-    public class Clothes
+    public class ClothesDTO
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public int Temperature { get; set; }
@@ -18,9 +17,5 @@ namespace WhatToWear.Models.Models
         public ClothesType Type { get; set; }
 
         public int UserId { get; set; }
-
-        [Required]
-        public User User { get; set; }
-
     }
 }

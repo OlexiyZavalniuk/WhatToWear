@@ -10,7 +10,7 @@ namespace WhatToWear.Core
 {
     public class CityService
     {
-        private ApplicationContext _db;
+        private readonly ApplicationContext _db;
 
         public CityService(ApplicationContext appContext)
         {

@@ -15,9 +15,12 @@ namespace WhatToWear.Database
             Database.EnsureCreated();
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WhatToWear;Trusted_Connection=True;");
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Clothes>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Clothes)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

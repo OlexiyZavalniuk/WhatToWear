@@ -41,6 +41,7 @@ namespace WhatToWear
 
             services.AddTransient<CityService>();
             services.AddTransient<UserService>();
+            services.AddTransient<ClothesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
