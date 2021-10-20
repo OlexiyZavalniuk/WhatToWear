@@ -8,12 +8,8 @@ using WhatToWear.Models.Models;
 
 namespace WhatToWear.Models.DTO
 {
-    public class ClothesDTO
+    public class InClothesDTO : ClothesDTO
     {
-        public string Name { get; set; }
-
-        public int Temperature { get; set; }
-
-        public ClothesType Type { get; set; }
+        public int UserId { get; set; }
     }
 }

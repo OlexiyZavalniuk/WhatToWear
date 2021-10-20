@@ -33,21 +33,21 @@ namespace WhatToWear.API.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<ActionResult<User>> Get(int id)
+        public async Task<ActionResult<UserDTO>> Get(int id)
         {
             return Ok(await _userService.GetUserAsync(id));
         }
 
         [Route("")]
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetAll()
+        public async Task<ActionResult<List<UserDTO>>> GetAll()
         {
             return Ok(await _userService.GetUsersAsync());
         }
 
         [Route("")]
         [HttpPut]
-        public async Task<ActionResult<User>> Update([FromBody] UserDTO user)
+        public async Task<ActionResult<UserDTO>> Update([FromBody] UserDTO user)
         {
             await _userService.UpdateUserAsync(user);
             return Ok(await _userService.GetUserAsync(user.Id));

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,13 @@ namespace WhatToWear.Core
     {
         private readonly ApplicationContext _db;
 
+        private readonly Mapper _mapper; 
+
         public UserService(ApplicationContext appContext)
         {
             _db = appContext;
+            var mapConf = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>());
+            _mapper = new Mapper(mapConf);
         }
 
         public async Task<int> CreateUserAsync(string name)
@@ -31,14 +36,21 @@ namespace WhatToWear.Core
             return user.Id;
         }
 
-        public async Task<User> GetUserAsync(int id)
+        public async Task<UserDTO> GetUserAsync(int id)
         {
-            return await _db.Users.Where(u => u.Id == id).FirstOrDefaultAsync();           
+            return _mapper.Map<UserDTO>(
+                await _db.Users.Where(u => u.Id == id).FirstOrDefaultAsync());           
         }
 
-        public async Task<List<User>> GetUsersAsync()
+        public async Task<List<UserDTO>> GetUsersAsync()
         {
-            return await _db.Users.ToListAsync();
+            List<User> users = await _db.Users.ToListAsync();
+            List<UserDTO> toReturn = new();
+            foreach (User u in users)
+            {
+                toReturn.Add(_mapper.Map<UserDTO>(u));
+            }
+            return toReturn;
         }
 
         public async Task DeleteUserAsync(int id)

@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WhatToWear.Database\WhatToWear.Database.csproj" />
     <ProjectReference Include="..\WhatToWear.Models\WhatToWear.Models.csproj" />
   </ItemGroup>

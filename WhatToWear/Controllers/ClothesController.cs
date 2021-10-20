@@ -26,7 +26,7 @@ namespace WhatToWear.API.Controllers
 
         [Route("")]
         [HttpPost]
-        public async Task<IActionResult> AddClothes([FromBody] ClothesDTO clothes)
+        public async Task<IActionResult> AddClothes([FromBody] InClothesDTO clothes)
         {
             await _clothesService.AddClothesAsync(clothes);
             return Ok();
@@ -38,6 +38,13 @@ namespace WhatToWear.API.Controllers
         {
             await _clothesService.RemoveClothesAsync(id);
             return Ok();
+        }
+
+        [Route("{id}")]
+        [HttpGet]
+        public async Task<ActionResult<List<OutClothesDTO>>> GetClothes(int id)
+        {
+            return Ok(await _clothesService.GetClothesAsync(id));
         }
     }
 }
