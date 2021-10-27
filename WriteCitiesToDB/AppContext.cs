@@ -8,7 +8,7 @@ namespace WriteCitiesToDB
     {
         public DbSet<City> Cities { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<ClothesDTO> Clothes { get; set; }
+        public DbSet<Clothes> Clothes { get; set; }
 
         public AppContext()
         {
