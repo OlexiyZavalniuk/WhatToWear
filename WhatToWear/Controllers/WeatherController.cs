@@ -11,23 +11,27 @@ namespace WhatToWear.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class WeatherController : Controller
+    public class WeatherController : ActionController<WeatherController>
     {
         private GetWeatherService _weatherService;
 
         private readonly ILogger<WeatherController> _logger;
 
-        public WeatherController(ILogger<WeatherController> logger, GetWeatherService weatherService)
-        {
+        public WeatherController(ILogger<WeatherController> logger, GetWeatherService weatherService) : base(logger)
+        {           
             _logger = logger;
             _weatherService = weatherService;
         }
 
-        [Route("{id}")]
-        [HttpGet]
-        public ActionResult<double> Get(int id)
-        {
-            return Ok(_weatherService.GetWeather(id).Main.Feels_like);
-        }
+        //[Route("{id}")]
+        //[HttpGet]
+        //public async Task<IActionResult> Get(int id)
+        //{
+        //    return await ExecuteActionAsync(() =>
+        //    {
+        //        var result = _weatherService.GetWeather(id).Result.Main.Feels_like;
+        //        return result;
+        //    });
+        //}
     }
 }

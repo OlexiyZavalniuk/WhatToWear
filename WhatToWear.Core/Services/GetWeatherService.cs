@@ -27,12 +27,12 @@ namespace WhatToWear.Core
             _client = new HttpClient();
         }
 
-        public WeatherDTO GetWeather(int id)
+        public async Task<WeatherDTO> GetWeather(int id)
         {
             User user = _db.Users.First(u => u.Id == id);
             string path = _apiPath + "&id=" + user.City + "&units=Metric";
 
-            return _client.GetFromJsonAsync<WeatherDTO>(path).Result;
+            return await _client.GetFromJsonAsync<WeatherDTO>(path);
         }
     }
 }

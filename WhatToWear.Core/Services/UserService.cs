@@ -64,6 +64,10 @@ namespace WhatToWear.Core
         public async Task UpdateUserAsync(UserDTO toUpdate)
         {
             User user = await _db.Users.FirstOrDefaultAsync(u => u.Id == toUpdate.Id);
+            if (user == default(User))
+            {
+                throw new Exception();
+            }
             user.Name = toUpdate.Name;
             user.Time = toUpdate.Time;
             user.Link = toUpdate.Link;

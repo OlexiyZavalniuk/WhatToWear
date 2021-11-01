@@ -8,17 +8,17 @@ using WhatToWear.Core;
 using WhatToWear.Models.DTO;
 using WhatToWear.Models.Models;
 
-namespace WhatToWear.API.Controllers
+namespace WhatToWear.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ClothesController : ControllerBase
+    public class ClothesController : ActionController<ClothesController>
     {
         private ClothesService _clothesService;
 
         private readonly ILogger<ClothesController> _logger;
 
-        public ClothesController(ILogger<ClothesController> logger, ClothesService clothesService)
+        public ClothesController(ILogger<ClothesController> logger, ClothesService clothesService) : base(logger)
         {
             _logger = logger;
             _clothesService = clothesService;
@@ -28,23 +28,30 @@ namespace WhatToWear.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddClothes([FromBody] InClothesDTO clothes)
         {
-            await _clothesService.AddClothesAsync(clothes);
-            return Ok();
+            return await ExecuteActionWithoutResultAsync(() =>
+            {
+                return _clothesService.AddClothesAsync(clothes);
+            });
         }
 
         [Route("{id}")]
         [HttpDelete]
         public async Task<IActionResult> RemoveClothes(int id)
         {
-            await _clothesService.RemoveClothesAsync(id);
-            return Ok();
+            return await ExecuteActionWithoutResultAsync(() =>
+            {
+                return _clothesService.RemoveClothesAsync(id);
+            });
         }
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<ActionResult<List<OutClothesDTO>>> GetClothes(int id)
+        public async Task<IActionResult> GetClothes(int id)
         {
-            return Ok(await _clothesService.GetClothesAsync(id));
+            return await ExecuteActionAsync(() =>
+            {
+                return  _clothesService.GetClothesAsync(id);
+            });
         }
     }
 }

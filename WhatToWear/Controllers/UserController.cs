@@ -8,17 +8,17 @@ using WhatToWear.Core;
 using WhatToWear.Models.DTO;
 using WhatToWear.Models.Models;
 
-namespace WhatToWear.API.Controllers
+namespace WhatToWear.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : ActionController<UserController>
     {
         private UserService _userService;
 
         private readonly ILogger<UserController> _logger;
 
-        public UserController(ILogger<UserController> logger, UserService userService)
+        public UserController(ILogger<UserController> logger, UserService userService) : base(logger)
         {
             _logger = logger;
             _userService = userService;
@@ -26,39 +26,58 @@ namespace WhatToWear.API.Controllers
 
         [Route("")]
         [HttpPost]
-        public async Task<ActionResult<int>> Create([FromBody] string name)
+        public async Task<IActionResult> Create([FromBody] string name)
         {
-            return Ok(await _userService.CreateUserAsync(name));
+            return await ExecuteActionAsync(() =>
+            {
+                return _userService.CreateUserAsync(name);
+            });
         }
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<ActionResult<UserDTO>> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return Ok(await _userService.GetUserAsync(id));
+
+            return await ExecuteActionAsync(() =>
+            {
+                return _userService.GetUserAsync(id);
+            });
         }
 
         [Route("")]
         [HttpGet]
-        public async Task<ActionResult<List<UserDTO>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(await _userService.GetUsersAsync());
+            return await ExecuteActionAsync(() =>
+            {
+                return _userService.GetUsersAsync();
+            });
         }
 
         [Route("")]
         [HttpPut]
-        public async Task<ActionResult<UserDTO>> Update([FromBody] UserDTO user)
+        public async Task<IActionResult> Update([FromBody] UserDTO user)
         {
-            await _userService.UpdateUserAsync(user);
-            return Ok(await _userService.GetUserAsync(user.Id));
+            await ExecuteActionWithoutResultAsync(() =>
+            {
+                return _userService.UpdateUserAsync(user);
+            });
+            return await ExecuteActionAsync(() =>
+            {
+                return _userService.GetUserAsync(user.Id);
+            });
         }
 
         [Route("{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            await _userService.DeleteUserAsync(id);
-            return Ok();
+            return await ExecuteActionWithoutResultAsync(() =>
+            {
+                return _userService.DeleteUserAsync(id);
+
+            });
         }
     }
 }
