@@ -42,7 +42,7 @@ namespace WhatToWear
             services.AddTransient<CityService>();
             services.AddTransient<UserService>();
             services.AddTransient<ClothesService>();
-            services.AddTransient<GetWeatherService>();
+            services.AddTransient<WhatToWearService>();
             
         }
 
