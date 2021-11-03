@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,11 @@ namespace WhatToWear.Core
 
         private readonly HttpClient _client;
 
-        public GetWeatherService(ApplicationContext appContext)
+        public GetWeatherService(ApplicationContext appContext, HttpClient client, IConfiguration configuration)
         {
             _db = appContext;
-            _apiPath = "https://api.openweathermap.org/data/2.5/weather?appid=d1df6d38b7583aba9cf9018fb7cbf442";
-            _client = new HttpClient();
+            _apiPath = configuration.GetConnectionString("WeatherAPI");
+            _client = client;
         }
 
         public async Task<WeatherDTO> GetWeather(int id)

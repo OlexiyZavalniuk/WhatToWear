@@ -16,18 +16,18 @@ namespace WhatToWear.Core
 
         private readonly GetWeatherService _weatherService;
 
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public WhatToWearService(ApplicationContext appContext)
+        public WhatToWearService(ApplicationContext appContext, GetWeatherService getWeatherService, IMapper mapper)
         {
             _db = appContext;
-            _weatherService = new(appContext);
-            var mapConf = new MapperConfiguration(cfg => cfg.CreateMap<Clothes, ClothesDTO>());
-            _mapper = new Mapper(mapConf);
+            _weatherService = getWeatherService;
+            _mapper = mapper;
         }
 
         public async Task<List<ClothesDTO>> GetClothesOrderByWeather(int id)
         {
+            //маппинг в самом конце
             List<Clothes> preAllClothes = _db.Clothes.Where(c => c.UserId == id).ToList();
             List<ClothesDTO> allClothes = new();
             foreach(Clothes c in preAllClothes)

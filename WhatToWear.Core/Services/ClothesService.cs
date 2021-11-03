@@ -15,13 +15,12 @@ namespace WhatToWear.Core
     {
         private readonly ApplicationContext _db;
 
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public ClothesService(ApplicationContext appContext)
+        public ClothesService(ApplicationContext appContext, IMapper mapper)
         {
             _db = appContext;
-            var mapConf = new MapperConfiguration(cfg => cfg.CreateMap<Clothes, OutClothesDTO>());
-            _mapper = new Mapper(mapConf);
+            _mapper = mapper;
         }
 
         public async Task AddClothesAsync(InClothesDTO clothes)

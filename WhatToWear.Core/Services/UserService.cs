@@ -15,13 +15,12 @@ namespace WhatToWear.Core
     {
         private readonly ApplicationContext _db;
 
-        private readonly Mapper _mapper; 
+        private readonly IMapper _mapper; 
 
-        public UserService(ApplicationContext appContext)
+        public UserService(ApplicationContext appContext, IMapper mapper)
         {
             _db = appContext;
-            var mapConf = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>());
-            _mapper = new Mapper(mapConf);
+            _mapper = mapper;
         }
 
         public async Task<int> CreateUserAsync(string name)

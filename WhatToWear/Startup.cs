@@ -36,13 +36,7 @@ namespace WhatToWear
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WhatToWear", Version = "v1" });
             });
 
-            services.AddDbContext<ApplicationContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("AppDbConnection")));
-
-            services.AddTransient<CityService>();
-            services.AddTransient<UserService>();
-            services.AddTransient<ClothesService>();
-            services.AddTransient<WhatToWearService>();
+            DIConfiguration.Configure(services, Configuration);
             
         }
 
