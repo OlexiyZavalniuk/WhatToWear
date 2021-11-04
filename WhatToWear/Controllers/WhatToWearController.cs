@@ -15,11 +15,8 @@ namespace WhatToWear.Controllers
     {
         private readonly WhatToWearService _whatToWearService;
 
-        private readonly ILogger<WhatToWearController> _logger;
-
         public WhatToWearController(ILogger<WhatToWearController> logger, WhatToWearService w) : base(logger)
         {           
-            _logger = logger;
             _whatToWearService = w;
         }
 

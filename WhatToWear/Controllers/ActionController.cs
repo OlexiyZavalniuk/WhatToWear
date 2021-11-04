@@ -9,9 +9,7 @@ namespace WhatToWear.Controllers
 {
     public class ActionController<TParentClass> : ControllerBase
     {
-        protected ILogger<TParentClass> Logger => _logger;
-
-        ILogger<TParentClass> _logger;
+        readonly ILogger<TParentClass> _logger;
 
         public ActionController(ILogger<TParentClass> logger)
         {

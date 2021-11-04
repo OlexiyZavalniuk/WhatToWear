@@ -14,13 +14,10 @@ namespace WhatToWear.Controllers
     [Route("api/[controller]")]
     public class UserController : ActionController<UserController>
     {
-        private UserService _userService;
-
-        private readonly ILogger<UserController> _logger;
+        private readonly UserService _userService;
 
         public UserController(ILogger<UserController> logger, UserService userService) : base(logger)
         {
-            _logger = logger;
             _userService = userService;
         }
 

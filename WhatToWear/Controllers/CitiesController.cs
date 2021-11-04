@@ -10,15 +10,12 @@ namespace WhatToWear.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CitiesController : ControllerBase
+    public class CitiesController : ActionController<CitiesController>
     {
-        private CityService _cityService;
+        private readonly CityService _cityService;
 
-        private readonly ILogger<CitiesController> _logger;
-
-        public CitiesController(ILogger<CitiesController> logger, CityService cityService)
+        public CitiesController(ILogger<CitiesController> logger, CityService cityService) : base(logger)
         {
-            _logger = logger;
             _cityService = cityService;
         }
 
@@ -26,7 +23,10 @@ namespace WhatToWear.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(string name)
         {
-            return Ok(await _cityService.GetCitiesAsync(name));
+            return await ExecuteActionAsync(() =>
+            {
+                return _cityService.GetCitiesAsync(name);
+            });
         }
     }
 }
