@@ -1,15 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 using WhatToWear.Database;
 using WhatToWear.Models.DTO;
-using WhatToWear.Models.Models;
 
 namespace WhatToWear.Core
 {
@@ -30,8 +25,8 @@ namespace WhatToWear.Core
 
         public async Task<WeatherDTO> GetWeather(int id)
         {
-            User user = _db.Users.First(u => u.Id == id);
-            string path = _apiPath + "&id=" + user.City + "&units=Metric";
+            var user = _db.Users.First(u => u.Id == id);
+            var path = _apiPath + "&id=" + user.City + "&units=Metric";
 
             return await _client.GetFromJsonAsync<WeatherDTO>(path);
         }

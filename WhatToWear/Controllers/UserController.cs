@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WhatToWear.Core;
 using WhatToWear.Models.DTO;
-using WhatToWear.Models.Models;
 
 namespace WhatToWear.Controllers
 {
@@ -56,13 +52,9 @@ namespace WhatToWear.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UserDTO user)
         {
-            await ExecuteActionWithoutResultAsync(() =>
-            {
-                return _userService.UpdateUserAsync(user);
-            });
             return await ExecuteActionAsync(() =>
             {
-                return _userService.GetUserAsync(user.Id);
+                return _userService.UpdateUserAsync(user);
             });
         }
 
@@ -73,7 +65,6 @@ namespace WhatToWear.Controllers
             return await ExecuteActionWithoutResultAsync(() =>
             {
                 return _userService.DeleteUserAsync(id);
-
             });
         }
     }

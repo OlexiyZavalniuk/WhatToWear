@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WhatToWear.Database;
 using WhatToWear.Models.DTO;
@@ -26,7 +25,7 @@ namespace WhatToWear.Core
         public async Task AddClothesAsync(InClothesDTO clothes)
         {
 
-            User user = await _db.Users.Include(u => u.Clothes)
+            var user = await _db.Users.Include(u => u.Clothes)
                 .FirstOrDefaultAsync(u => u.Id == clothes.UserId);
             if(user == default(User))
             {
@@ -56,7 +55,7 @@ namespace WhatToWear.Core
             {
                 throw new Exception();
             }
-            List<Clothes> clothes =  await _db.Clothes.Where(c => c.UserId == id).ToListAsync();
+            var clothes =  await _db.Clothes.Where(c => c.UserId == id).ToListAsync();
             List<OutClothesDTO> toReturn = new();
             foreach (Clothes c in clothes)
             {

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using WhatToWear.Models.Models;
 using WhatToWear.Core;
 
 namespace WhatToWear.Controllers

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WhatToWear.Database;
 using WhatToWear.Models.DTO;
@@ -43,7 +42,7 @@ namespace WhatToWear.Core
 
         public async Task<List<UserDTO>> GetUsersAsync()
         {
-            List<User> users = await _db.Users.ToListAsync();
+            var users = await _db.Users.ToListAsync();
             List<UserDTO> toReturn = new();
             foreach (User u in users)
             {
@@ -60,9 +59,9 @@ namespace WhatToWear.Core
             await _db.SaveChangesAsync();
         }
 
-        public async Task UpdateUserAsync(UserDTO toUpdate)
+        public async Task<UserDTO> UpdateUserAsync(UserDTO toUpdate)
         {
-            User user = await _db.Users.FirstOrDefaultAsync(u => u.Id == toUpdate.Id);
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.Id == toUpdate.Id);
             if (user == default(User))
             {
                 throw new Exception();
@@ -72,6 +71,8 @@ namespace WhatToWear.Core
             user.Link = toUpdate.Link;
             user.City = toUpdate.City;
             await _db.SaveChangesAsync();
+
+            return _mapper.Map<UserDTO>(user);
         }
     }
 }

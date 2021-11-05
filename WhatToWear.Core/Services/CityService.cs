@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WhatToWear.Models.Models;
 using WhatToWear.Database;
 using System.Linq;
