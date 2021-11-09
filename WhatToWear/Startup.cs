@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using WhatToWear.Core;
+using Hangfire;
 
 namespace WhatToWear
 {
@@ -46,6 +47,8 @@ namespace WhatToWear
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseHangfireDashboard("/dashboard");
 
             app.UseEndpoints(endpoints =>
             {

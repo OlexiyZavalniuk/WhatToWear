@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using WhatToWear.Database;
 using AutoMapper;
 using System.Net.Http;
+using Hangfire;
 
 namespace WhatToWear.Core
 {
@@ -20,6 +21,11 @@ namespace WhatToWear.Core
             services.AddTransient<WhatToWearService>();
             services.AddTransient<GetWeatherService>();
             services.AddSingleton<HttpClient>();
+            services.AddTransient<MailService>();
+
+            services.AddHangfire(opt => 
+                    opt.UseSqlServerStorage(configuration.GetConnectionString("HangfireDB")));
+            services.AddHangfireServer();
 
             services.AddSingleton(new MapperConfiguration(config =>
             {

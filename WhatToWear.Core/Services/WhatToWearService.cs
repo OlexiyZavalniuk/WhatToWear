@@ -23,7 +23,7 @@ namespace WhatToWear.Core
             _mapper = mapper;
         }
 
-        public async Task<List<ClothesDTO>> GetClothesOrderByWeather(int id)
+        public async Task<List<ClothesDTO>> GetClothesOrderByWeatherAsync(int id)
         {
             var preAllClothes = _db.Clothes.Where(c => c.UserId == id).ToList();
 

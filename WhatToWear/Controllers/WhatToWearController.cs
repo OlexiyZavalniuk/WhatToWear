@@ -22,7 +22,7 @@ namespace WhatToWear.Controllers
         {
             return await ExecuteActionAsync(() =>
             {
-                return _whatToWearService.GetClothesOrderByWeather(id);
+                return _whatToWearService.GetClothesOrderByWeatherAsync(id);
             });
         }
     }
