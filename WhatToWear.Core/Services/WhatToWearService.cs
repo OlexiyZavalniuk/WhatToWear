@@ -27,7 +27,7 @@ namespace WhatToWear.Core
         {
             var preAllClothes = _db.Clothes.Where(c => c.UserId == id).ToList();
 
-            var weather = await _weatherService.GetWeather(id);
+            var weather = await _weatherService.GetWeatherAsync(id);
             var temperature = weather.Main.Feels_like;
 
             var allClothes = preAllClothes.Select(c => new
