@@ -39,11 +39,11 @@ namespace WhatToWear.Core
 
             ClothesDTO[] bestClothes = new ClothesDTO[6];
 
-            bestClothes[0] = _mapper.Map<ClothesDTO>(allClothes.FirstOrDefault(c => c.Cloth.Type == ClothesType.HeadDress).Cloth);
-            bestClothes[1] = _mapper.Map<ClothesDTO>(allClothes.FirstOrDefault(c => c.Cloth.Type == ClothesType.OuterWear).Cloth);
-            bestClothes[2] = _mapper.Map<ClothesDTO>(allClothes.FirstOrDefault(c => c.Cloth.Type == ClothesType.MediumWear).Cloth);
-            bestClothes[3] = _mapper.Map<ClothesDTO>(allClothes.FirstOrDefault(c => c.Cloth.Type == ClothesType.HandWear).Cloth);
-            bestClothes[4] = _mapper.Map<ClothesDTO>(allClothes.FirstOrDefault(c => c.Cloth.Type == ClothesType.FootWear).Cloth);
+            bestClothes[0] = _mapper.Map<ClothesDTO>(allClothes.First(c => c.Cloth.Type == ClothesType.HeadDress).Cloth);
+            bestClothes[1] = _mapper.Map<ClothesDTO>(allClothes.First(c => c.Cloth.Type == ClothesType.OuterWear).Cloth);
+            bestClothes[2] = _mapper.Map<ClothesDTO>(allClothes.First(c => c.Cloth.Type == ClothesType.MediumWear).Cloth);
+            bestClothes[3] = _mapper.Map<ClothesDTO>(allClothes.First(c => c.Cloth.Type == ClothesType.HandWear).Cloth);
+            bestClothes[4] = _mapper.Map<ClothesDTO>(allClothes.First(c => c.Cloth.Type == ClothesType.FootWear).Cloth);
 
 
             bestClothes[5] = new()

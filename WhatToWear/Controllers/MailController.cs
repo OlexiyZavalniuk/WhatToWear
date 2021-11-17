@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 
 namespace WhatToWear.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class MailController : ActionController<MailController>
     {
         private readonly MailService _mailService;

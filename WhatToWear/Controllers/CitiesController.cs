@@ -25,5 +25,15 @@ namespace WhatToWear.Controllers
                 return _cityService.GetCitiesAsync(name);
             });
         }
+
+        [Route("Initial")]
+        [HttpGet]
+        public async Task<IActionResult> Initial()
+        {
+            return await ExecuteActionWithoutResultAsync(() =>
+            {
+                return _cityService.Initialising();
+            });
+        }
     }
 }
