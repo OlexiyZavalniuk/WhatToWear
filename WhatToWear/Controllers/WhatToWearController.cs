@@ -36,5 +36,15 @@ namespace WhatToWear.Controllers
             });
         }
 
+        [Route("/trip/{id}-{city}")]
+        [HttpGet]
+        public async Task<IActionResult> GetTrip(int id, double city)
+        {
+            return await ExecuteActionAsync(() =>
+            {
+                return _whatToWearService.GetClothesOrderByWeatherForTrip(id, city);
+            });
+        }
+
     }
 }

@@ -42,5 +42,12 @@ namespace WhatToWear.Core
 
             return await _client.GetFromJsonAsync<Weather16DTO>(path);
         }
+
+        public async Task<Weather16DTO> GetWeather16DaysByCityIdAsync(double id)
+        {
+            var path = _apiPath16 + id;
+
+            return await _client.GetFromJsonAsync<Weather16DTO>(path);
+        }
     }
 }

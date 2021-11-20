@@ -24,6 +24,22 @@ namespace WhatToWear.Core
             _mapper = mapper;
         }
 
+        public async Task<List<ClothesDTO>> GetClothesOrderByWeatherForTrip(int id, double city)
+        {
+            var weather = await _weatherService.GetWeather16DaysByCityIdAsync(city);
+            List<ClothesDTO> clothes = new();
+
+            foreach (Datum d in weather.Data)
+            {
+                var temperature = d.App_max_temp;
+
+                var dayWeather = GetBestClothes(id, temperature);
+                clothes.AddRange(dayWeather);
+            }
+
+            return clothes.GroupBy(x => x.Name).Select(y => y.First()).ToList();
+        }
+
         public async Task<List<List<ClothesDTO>>> GetClothesOrderByWeather16DaysAsync(int id)
         {
             var weather = await _weatherService.GetWeather16DaysAsync(id);
@@ -54,16 +70,16 @@ namespace WhatToWear.Core
         {
             var bestClothes = GetBestClothes(id, temperature);
 
-            bestClothes[5] = new()
+            bestClothes.Add(new()
             {
                 Name = description,
                 Temperature = (int)temperature
-            };
+            });
 
-            return bestClothes.ToList();
+            return bestClothes;
         }
 
-        private ClothesDTO[] GetBestClothes(int id, double temperature)
+        private List<ClothesDTO> GetBestClothes(int id, double temperature)
         {
             var preAllClothes = _db.Clothes.Where(c => c.UserId == id).ToList();
 
@@ -74,7 +90,7 @@ namespace WhatToWear.Core
             })
             .OrderBy(x => x.Diff);
 
-            ClothesDTO[] bestClothes = new ClothesDTO[6];
+            ClothesDTO[] bestClothes = new ClothesDTO[5];
 
             bestClothes[0] = _mapper.Map<ClothesDTO>(allClothes.First(c => c.Cloth.Type == ClothesType.HeadDress).Cloth);
             bestClothes[1] = _mapper.Map<ClothesDTO>(allClothes.First(c => c.Cloth.Type == ClothesType.OuterWear).Cloth);
@@ -82,7 +98,7 @@ namespace WhatToWear.Core
             bestClothes[3] = _mapper.Map<ClothesDTO>(allClothes.First(c => c.Cloth.Type == ClothesType.HandWear).Cloth);
             bestClothes[4] = _mapper.Map<ClothesDTO>(allClothes.First(c => c.Cloth.Type == ClothesType.FootWear).Cloth);
 
-            return bestClothes;
+            return bestClothes.ToList();
         }
 
         private static double GetMetric(double weather, double clothes)
