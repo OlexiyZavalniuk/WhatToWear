@@ -24,7 +24,7 @@ namespace WhatToWear.Controllers
         {
             return await ExecuteActionWithoutResultAsync(() =>
             {
-                return _mailService.SendMailsAsync(id, h, m);
+                return _mailService.SendMailAsync(id, h, m);
             });
         }
 
