@@ -9,7 +9,6 @@ using WhatToWear.Models.Models;
 using WhatToWear.Models.DTO;
 using Newtonsoft.Json;
 using System.Net.Mail;
-using System.IO;
 
 namespace WhatToWear.Core
 {
@@ -58,7 +57,7 @@ namespace WhatToWear.Core
             RecurringJob.AddOrUpdate(Convert.ToString(id), () => SendAsync(user.Link, subject, message, name), Cron.Daily(h, m), TimeZoneInfo.Local);    
         }
 
-        public Task SendAsync(string email, string subject, string message, string name)
+        public async Task SendAsync(string email, string subject, string message, string name)
         {
             var from = "whattowearsender@gmail.com";
             var pass = "15041865";
@@ -79,9 +78,13 @@ namespace WhatToWear.Core
 
             _drawService.DrawImage(name);
 
-            mail.Attachments.Add(new Attachment("../WhatToWear.Database/Data/Result.jpg"));
+            var a = new Attachment("../WhatToWear.Database/Data/Result.jpg");
 
-            return client.SendMailAsync(mail);
+            mail.Attachments.Add(a);
+
+            await client.SendMailAsync(mail);
+
+            a.Dispose();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace WhatToWear.Core
 {
@@ -10,7 +11,6 @@ namespace WhatToWear.Core
         public void DrawImage(string name)
         {
             var r = new Random();
-
             Console.WriteLine("Run...");
             Image image = Image.FromFile("../WhatToWear.Database/Data/Clear.jpg");
 
@@ -51,10 +51,10 @@ namespace WhatToWear.Core
                     200, 389, StringFormat.GenericDefault);
             }
 
-            image.Save("../WhatToWear.Database/Data/Result.jpg");
+            image.Save("../WhatToWear.Database/Data/Result.jpg");          
         }
-        
-        private void DrawEmoji(Graphics g, float f)
+
+        private static void DrawEmoji(Graphics g, float f)
         {
             var rnd = new Random();
             var emoji = rnd.Next(0x1F000, 0x1F999);
