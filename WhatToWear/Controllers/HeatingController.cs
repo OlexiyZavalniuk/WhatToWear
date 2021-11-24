@@ -8,6 +8,8 @@ using WhatToWear.Core;
 
 namespace WhatToWear.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class HeatingController : ActionController<HeatingController>
     {
         private readonly HeatingCalculationService _heatingCalculationService;

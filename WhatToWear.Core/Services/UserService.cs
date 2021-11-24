@@ -67,7 +67,6 @@ namespace WhatToWear.Core
                 throw new Exception();
             }
             user.Name = toUpdate.Name;
-            user.Time = toUpdate.Time;
             user.Link = toUpdate.Link;
             user.City = toUpdate.City;
             await _db.SaveChangesAsync();

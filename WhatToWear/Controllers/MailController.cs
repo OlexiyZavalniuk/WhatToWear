@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 
 namespace WhatToWear.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class MailController : ActionController<MailController>
     {
         private readonly MailService _mailService;
@@ -22,7 +24,7 @@ namespace WhatToWear.Controllers
         {
             return await ExecuteActionWithoutResultAsync(() =>
             {
-                return _mailService.SendMailsAsync(id, h, m);
+                return _mailService.SendMailAsync(id, h, m);
             });
         }
 

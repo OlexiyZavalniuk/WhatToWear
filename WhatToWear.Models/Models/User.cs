@@ -10,8 +10,6 @@ namespace WhatToWear.Models.Models
         public string Name { get; set; }
 
         public double City { get; set; }
-        
-        public DateTime Time { get; set; }
 
         public string Link { get; set; }
 

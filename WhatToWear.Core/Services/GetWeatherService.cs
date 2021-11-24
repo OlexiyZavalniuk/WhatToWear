@@ -30,7 +30,7 @@ namespace WhatToWear.Core
         public async Task<WeatherDTO> GetWeatherAsync(int id)
         {
             var user = _db.Users.First(u => u.Id == id);
-            var path = _apiPath + "&id=" + user.City + "&units=Metric";
+            var path = _apiPath + user.City;
 
             return await _client.GetFromJsonAsync<WeatherDTO>(path);
         }
@@ -39,6 +39,13 @@ namespace WhatToWear.Core
         {
             var user = _db.Users.First(u => u.Id == id);
             var path = _apiPath16 + user.City;
+
+            return await _client.GetFromJsonAsync<Weather16DTO>(path);
+        }
+
+        public async Task<Weather16DTO> GetWeather16DaysByCityIdAsync(double id)
+        {
+            var path = _apiPath16 + id;
 
             return await _client.GetFromJsonAsync<Weather16DTO>(path);
         }

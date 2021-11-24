@@ -16,7 +16,7 @@ namespace WhatToWear.Controllers
             _whatToWearService = w;
         }
 
-        [Route("{id}")]
+        [Route("/now/{id}")]
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
@@ -25,5 +25,26 @@ namespace WhatToWear.Controllers
                 return _whatToWearService.GetClothesOrderByWeatherAsync(id);
             });
         }
+
+        [Route("/16days/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> Get16(int id)
+        {
+            return await ExecuteActionAsync(() =>
+            {
+                return _whatToWearService.GetClothesOrderByWeather16DaysAsync(id);
+            });
+        }
+
+        [Route("/trip/{id}-{city}")]
+        [HttpGet]
+        public async Task<IActionResult> GetTrip(int id, double city)
+        {
+            return await ExecuteActionAsync(() =>
+            {
+                return _whatToWearService.GetClothesOrderByWeatherForTrip(id, city);
+            });
+        }
+
     }
 }
