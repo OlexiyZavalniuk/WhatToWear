@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.IO;
 
 namespace WhatToWear.Core
 {
@@ -11,7 +9,6 @@ namespace WhatToWear.Core
         public void DrawImage(string name)
         {
             var r = new Random();
-            Console.WriteLine("Run...");
             Image image = Image.FromFile("../WhatToWear.Database/Data/Clear.jpg");
 
             Graphics g = Graphics.FromImage(image);

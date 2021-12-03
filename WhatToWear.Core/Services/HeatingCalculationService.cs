@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WhatToWear.Models.DTO;
 
 namespace WhatToWear.Core
 {
@@ -15,7 +16,7 @@ namespace WhatToWear.Core
             _weatherService = getWeatherService;
         }
 
-        public async Task<double> CalculateAsync(int id, double temperature, double square)
+        public async Task<HeatingResultDTO> CalculateAsync(int id, double temperature, double square)
         {
             var weather = await _weatherService.GetWeather16DaysAsync(id);
             double loss = 0.0;
@@ -25,7 +26,15 @@ namespace WhatToWear.Core
                 loss += 86400.0 * GetHeatLoss(x.Min_temp, temperature, square) * ((temperature - x.Temp) / (temperature - x.Min_temp));
             }
 
-            return loss;
+            var result = new HeatingResultDTO()
+            {
+                KJ = loss,
+                KW = loss / 3600,
+                PriceGaz = loss / 4680,
+                PriceElectric = loss * 1.68 / 3600
+            };
+
+            return result;
         }
 
         private static double GetHeatLoss(float out_temp, double temp, double square)

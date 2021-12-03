@@ -40,23 +40,23 @@ namespace WhatToWear.Core
             return clothes.GroupBy(x => x.Name).Select(y => y.First()).ToList();
         }
 
-        public async Task<List<List<ClothesDTO>>> GetClothesOrderByWeather16DaysAsync(int id)
+        public async Task<List<WhatToWearDTO>> GetClothesOrderByWeather16DaysAsync(int id)
         {
             var weather = await _weatherService.GetWeather16DaysAsync(id);
-            List<List<ClothesDTO>> clothes = new();
+            List<WhatToWearDTO> result = new();
 
             foreach (Datum d in weather.Data)
             {
                 var temperature = d.App_max_temp; 
                 var description = d.Weather.Description + " (" + d.Valid_date + ")";
 
-                clothes.Add(GetBestClothesWithWeather(id, temperature, description));
+                result.Add(GetBestClothesWithWeather(id, temperature, description));
             }
 
-            return clothes;
+            return result;
         }
 
-        public async Task<List<ClothesDTO>> GetClothesOrderByWeatherAsync(int id)
+        public async Task<WhatToWearDTO> GetClothesOrderByWeatherAsync(int id)
         {
             var weather = await _weatherService.GetWeatherAsync(id);
             var temperature = weather.Main.Feels_like;
@@ -65,18 +65,20 @@ namespace WhatToWear.Core
             return GetBestClothesWithWeather(id, temperature, description);
         }
 
-        
-        private List<ClothesDTO> GetBestClothesWithWeather(int id, double temperature, string description)
+
+        private WhatToWearDTO GetBestClothesWithWeather(int id, double temperature, string description)
         {
             var bestClothes = GetBestClothes(id, temperature);
+            WhatToWearDTO result = new();
+            result.Clothes = bestClothes;
 
-            bestClothes.Add(new()
+            result.Weather = new()
             {
-                Name = description,
+                Description = description,
                 Temperature = (int)temperature
-            });
+            };
 
-            return bestClothes;
+            return result;
         }
 
         private List<ClothesDTO> GetBestClothes(int id, double temperature)

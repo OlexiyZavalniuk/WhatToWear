@@ -48,10 +48,11 @@ namespace WhatToWear.Core
             var name = obj.Data.Namedays.Us.Split(",")[0];
 
             string message = "";
-            foreach(var c in clothes)
+            foreach(var c in clothes.Clothes)
             {
                 message += c.Name + " (" + c.Temperature + " °C)" + Environment.NewLine;
             }
+            message += " Weather: " + clothes.Weather.Description + " (" + clothes.Weather.Temperature + "°C)";
             string subject = "Hello, " + user.Name + "! Clothes for today:";
 
             RecurringJob.AddOrUpdate(Convert.ToString(id), () => SendAsync(user.Link, subject, message, name), Cron.Daily(h, m), TimeZoneInfo.Local);    
