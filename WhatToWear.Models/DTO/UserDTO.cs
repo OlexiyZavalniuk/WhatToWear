@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace WhatToWear.Models.DTO
 {
     public class UserDTO

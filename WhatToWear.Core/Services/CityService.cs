@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.IO;
-using System;
 
 namespace WhatToWear.Core
 {
