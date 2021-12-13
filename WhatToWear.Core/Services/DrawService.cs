@@ -4,16 +4,16 @@ using System.Drawing.Drawing2D;
 
 namespace WhatToWear.Core
 {
-    public class DrawService
+    public static class DrawService
     {
-        public void DrawImage(string name)
+        public static void DrawImage(string name)
         {
             var r = new Random();
             Image image = Image.FromFile("../WhatToWear.Database/Data/Clear.jpg");
 
             Graphics g = Graphics.FromImage(image);
 
-            LinearGradientBrush linGrBrush = new LinearGradientBrush(
+            LinearGradientBrush linGrBrush = new(
                 new Point(0, 0),
                 new Point(0, 1000),
                 Color.FromArgb(r.Next(125, 255), r.Next(0, 255), r.Next(0, 255), r.Next(0, 255)),
