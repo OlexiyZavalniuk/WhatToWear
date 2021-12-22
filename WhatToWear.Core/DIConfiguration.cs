@@ -23,7 +23,6 @@ namespace WhatToWear.Core
             services.AddSingleton<HttpClient>();
             services.AddTransient<MailService>();
             services.AddTransient<HeatingCalculationService>();
-            services.AddTransient<DrawService>();
 
             services.AddHangfire(opt => 
                     opt.UseSqlServerStorage(configuration.GetConnectionString("HangfireDB")));

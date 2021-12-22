@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.IO;
-using System;
 
 namespace WhatToWear.Core
 {
@@ -21,7 +20,7 @@ namespace WhatToWear.Core
 
         public async Task<IEnumerable<City>> GetCitiesAsync(string toFind)
         {
-            return await _db.Cities.Where(c => c.Name == toFind).ToListAsync();
+            return await _db.Cities.Where(c => c.Name.Contains(toFind)).ToListAsync();
         }
 
         public async Task Initialising()
