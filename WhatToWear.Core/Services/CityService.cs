@@ -9,7 +9,7 @@ using System.IO;
 
 namespace WhatToWear.Core
 {
-    public class CityService
+    public class CityService : ICityService
     {
         private readonly ApplicationContext _db;
 
@@ -33,7 +33,7 @@ namespace WhatToWear.Core
 
             foreach (City city in citiesList)
             {
-                await _db.Cities.AddAsync(city);
+                _db.Cities.Add(city);
             }
             await _db.SaveChangesAsync();
         }

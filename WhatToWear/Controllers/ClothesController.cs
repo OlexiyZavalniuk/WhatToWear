@@ -10,9 +10,9 @@ namespace WhatToWear.Controllers
     [Route("api/[controller]")]
     public class ClothesController : ActionController<ClothesController>
     {
-        private readonly ClothesService _clothesService;
+        private readonly IClothesService _clothesService;
 
-        public ClothesController(ILogger<ClothesController> logger, ClothesService clothesService) : base(logger)
+        public ClothesController(ILogger<ClothesController> logger, IClothesService clothesService) : base(logger)
         {
             _clothesService = clothesService;
         }

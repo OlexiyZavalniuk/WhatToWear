@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
 using WhatToWear.Models.Models;
 
 namespace WhatToWear.Database

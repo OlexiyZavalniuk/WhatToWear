@@ -11,9 +11,9 @@ namespace WhatToWear.Controllers
     [Route("api/[controller]")]
     public class MailController : ActionController<MailController>
     {
-        private readonly MailService _mailService;
+        private readonly IMailService _mailService;
 
-        public MailController(ILogger<MailController> logger, MailService mailService) : base(logger)
+        public MailController(ILogger<MailController> logger, IMailService mailService) : base(logger)
         {
             _mailService = mailService;
         }

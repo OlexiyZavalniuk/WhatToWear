@@ -9,15 +9,15 @@ namespace WhatToWear.Controllers
     [Route("api/[controller]")]
     public class WhatToWearController : ActionController<WhatToWearController>
     {
-        private readonly WhatToWearService _whatToWearService;
+        private readonly IWhatToWearService _whatToWearService;
 
-        public WhatToWearController(ILogger<WhatToWearController> logger, WhatToWearService w) : base(logger)
+        public WhatToWearController(ILogger<WhatToWearController> logger, IWhatToWearService w) : base(logger)
         {           
             _whatToWearService = w;
         }
 
-        [Route("/now/{id}")]
-        [HttpGet]
+ 
+        [HttpGet("/now/{id}")]
         public async Task<IActionResult> Get(int id)
         {
             return await ExecuteActionAsync(() =>
@@ -26,8 +26,7 @@ namespace WhatToWear.Controllers
             });
         }
 
-        [Route("/16days/{id}")]
-        [HttpGet]
+        [HttpGet("/16days/{id}")]
         public async Task<IActionResult> Get16(int id)
         {
             return await ExecuteActionAsync(() =>
@@ -36,8 +35,7 @@ namespace WhatToWear.Controllers
             });
         }
 
-        [Route("/trip/{id}-{city}")]
-        [HttpGet]
+        [HttpGet("/trip/{id}-{city}")]
         public async Task<IActionResult> GetTrip(int id, double city)
         {
             return await ExecuteActionAsync(() =>

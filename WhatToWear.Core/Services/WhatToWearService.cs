@@ -9,15 +9,15 @@ using WhatToWear.Models.DTO2;
 
 namespace WhatToWear.Core
 {
-    public class WhatToWearService
+    public class WhatToWearService : IWhatToWearService
     {
         private readonly ApplicationContext _db;
 
-        private readonly GetWeatherService _weatherService;
+        private readonly IGetWeatherService _weatherService;
 
         private readonly IMapper _mapper;
 
-        public WhatToWearService(ApplicationContext appContext, GetWeatherService getWeatherService, IMapper mapper)
+        public WhatToWearService(ApplicationContext appContext, IGetWeatherService getWeatherService, IMapper mapper)
         {
             _db = appContext;
             _weatherService = getWeatherService;

@@ -10,7 +10,7 @@ using WhatToWear.Models.Models;
 
 namespace WhatToWear.Core
 {
-    public class ClothesService
+    public class ClothesService : IClothesService
     {
         private readonly ApplicationContext _db;
 

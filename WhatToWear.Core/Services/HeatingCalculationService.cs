@@ -4,11 +4,11 @@ using WhatToWear.Models.DTO;
 
 namespace WhatToWear.Core
 {
-    public class HeatingCalculationService
+    public class HeatingCalculationService : IHeatingCalculationService
     {
-        private readonly GetWeatherService _weatherService;
+        private readonly IGetWeatherService _weatherService;
 
-        public HeatingCalculationService(GetWeatherService getWeatherService)
+        public HeatingCalculationService(IGetWeatherService getWeatherService)
         {
             _weatherService = getWeatherService;
         }
