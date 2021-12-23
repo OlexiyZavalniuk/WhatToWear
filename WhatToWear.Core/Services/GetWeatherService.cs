@@ -9,7 +9,7 @@ using WhatToWear.Models.DTO2;
 
 namespace WhatToWear.Core
 {
-    public class GetWeatherService
+    public class GetWeatherService : IGetWeatherService
     {
         private readonly ApplicationContext _db;
 

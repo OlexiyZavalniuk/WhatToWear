@@ -9,9 +9,9 @@ namespace WhatToWear.Controllers
     [Route("api/[controller]")]
     public class HeatingController : ActionController<HeatingController>
     {
-        private readonly HeatingCalculationService _heatingCalculationService;
+        private readonly IHeatingCalculationService _heatingCalculationService;
 
-        public HeatingController(ILogger<HeatingController> logger, HeatingCalculationService h) : base(logger)
+        public HeatingController(ILogger<HeatingController> logger, IHeatingCalculationService h) : base(logger)
         {
             _heatingCalculationService = h;
         }

@@ -15,16 +15,16 @@ namespace WhatToWear.Core
             services.AddDbContext<ApplicationContext>(opt =>
                     opt.UseSqlServer(configuration.GetConnectionString("AppDbConnection")));
 
-            services.AddTransient<CityService>();
-            services.AddTransient<UserService>();
-            services.AddTransient<ClothesService>();
-            services.AddTransient<WhatToWearService>();
-            services.AddTransient<GetWeatherService>();
+            services.AddTransient<ICityService, CityService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IClothesService, ClothesService>();
+            services.AddTransient<IWhatToWearService, WhatToWearService>();
+            services.AddTransient<IGetWeatherService, GetWeatherService>();
             services.AddSingleton<HttpClient>();
-            services.AddTransient<MailService>();
-            services.AddTransient<HeatingCalculationService>();
+            services.AddTransient<IMailService, MailService>();
+            services.AddTransient<IHeatingCalculationService, HeatingCalculationService>();
 
-            services.AddHangfire(opt => 
+            services.AddHangfire(opt =>
                     opt.UseSqlServerStorage(configuration.GetConnectionString("HangfireDB")));
             services.AddHangfireServer();
 

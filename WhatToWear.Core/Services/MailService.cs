@@ -10,23 +10,23 @@ using WhatToWear.Models.DTO;
 using Newtonsoft.Json;
 using System.Net.Mail;
 using System.Net;
-using Microsoft.Extensions.Options;
+using System.Text;
 
 namespace WhatToWear.Core
 {
-    public class MailService
+    public class MailService : IMailService
     {
         private readonly string _apiPath;
 
         private readonly ApplicationContext _db;
 
-        private readonly WhatToWearService _whatToWearService;
+        private readonly IWhatToWearService _whatToWearService;
 
         private readonly HttpClient _client;
 
         private readonly MailSettingsDTO _mailSettings;
 
-        public MailService(ApplicationContext appContext, WhatToWearService whatToWearService, HttpClient client, IConfiguration configuration)
+        public MailService(ApplicationContext appContext, IWhatToWearService whatToWearService, HttpClient client, IConfiguration configuration)
         {
             _client = client;
             _db = appContext;
@@ -55,15 +55,15 @@ namespace WhatToWear.Core
             var obj = JsonConvert.DeserializeObject<NameDayDTO>(await response.Content.ReadAsStringAsync());
             var name = obj.Data.Namedays.Us.Split(",")[0];
 
-            string message = "";
+            StringBuilder message = new();
             foreach(var c in clothes.Clothes)
             {
-                message += c.Name + " (" + c.Temperature + " °C)" + Environment.NewLine;
+                message.AppendLine($"{c.Name} ({c.Temperature} °C)");
             }
-            message += " Weather: " + clothes.Weather.Description + " (" + clothes.Weather.Temperature + "°C)";
+            message.Append($" Weather: {clothes.Weather.Description} ({clothes.Weather.Temperature} °C)");
             string subject = "Hello, " + user.Name + "! Clothes for today:";
 
-            RecurringJob.AddOrUpdate(Convert.ToString(id), () => SendAsync(user.Link, subject, message, name), Cron.Daily(h, m), TimeZoneInfo.Local);    
+            RecurringJob.AddOrUpdate(Convert.ToString(id), () => SendAsync(user.Link, subject, message.ToString(), name), Cron.Daily(h, m), TimeZoneInfo.Local);    
         }
 
         public async Task SendAsync(string email, string subject, string message, string name)
